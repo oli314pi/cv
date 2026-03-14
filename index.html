@@ -176,6 +176,54 @@
             flex-shrink: 0;
         }
 
+        /* Contact Form Styling */
+        .contact-form {
+            background: var(--secondary);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -284,19 +332,20 @@
 <div class="portfolio-wrapper">
     <aside class="sidebar">
         <div class="profile-container">
-            <img src="https://scontent.fakl1-4.fna.fbcdn.net/v/t39.30808-6/481282634_10222121100936682_6211189725825066556_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=dVgteLAalFsQ7kNvwFkwNxL&_nc_oc=Admpd3DRTCXZS8ZlmPHh59cbBA9glnFWf3kpisacCgZXkZA74Ro9wtTRLolaUpd7FCSLFB_JiwfeV3uEFuSGp6G7&_nc_zt=23&_nc_ht=scontent.fakl1-4.fna&_nc_gid=eososVmy-wmwYvhB3T0ZUw&_nc_ss=8&oh=00_AfzdDUb8UD6kySoXMxNlsX8nUgqE1MwTUOc8aSuBx5SIGA&oe=69BAB299" alt="Oliver Lucindo" class="profile-pic">
+            <img src="https://i.imghippo.com/files/MUf5981A.png" alt="Oliver Lucindo" class="profile-pic">
             <h1>Oliver<br>LUCINDO</h1>
             <p class="tagline">IT Professional</p>
         </div>
 
         <div class="contact-box">
             <p><strong>Location:</strong> North Shore, Auckland</p>
-            <p><strong>Email:</strong> oliver@lucindo.co.nz</p>
+            <p><strong>Email:</strong> <a href="mailto:oliver948@gmail.com" style="color: inherit; text-decoration: none;">oliver948@gmail.com</a></p>
             <p><strong>Phone:</strong> +64 21 081 221 64</p>
             
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/oliver-lucindo-4140441/" target="_blank">LinkedIn</a>
                 <a href="#">GitHub</a>
+                <a href="#">Download PDF</a>
             </div>
         </div>
     </aside>
@@ -375,6 +424,28 @@
             </div>
         </section>
 
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/mkoqzpzz" method="POST">
+                    <input type="hidden" name="_subject" value="New Portfolio Inquiry">
+                    <div class="form-group">
+                        <label for="full-name">Name</label>
+                        <input type="text" name="name" id="full-name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-address">Email Address</label>
+                        <input type="email" name="_replyto" id="email-address" placeholder="email@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" placeholder="How can I help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
         <footer style="margin-top: 100px; color: var(--muted); font-size: 0.8rem;">
             &copy; 2026 Oliver Lucindo. Auckland, New Zealand.
         </footer>
@@ -382,7 +453,5 @@
 </div>
 
 </body>
-
-<!-- Very good sleuthing! You have even inspected my code.. but for what [nefarious(?)] purpose, I suppose? Care to get in touch? ..then quote me the first ten digits of pi -->
 
 </html>
