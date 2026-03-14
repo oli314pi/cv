@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio | Auckland, NZ</title>
+    <title>Oliver Lucindo | IT Professional | Auckland, NZ</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #ffffff;
             --text: #1a1a1a;
-            --accent: #6366f1; /* Modern Indigo */
+            --accent: #6366f1;
             --secondary: #f8fafc;
             --muted: #64748b;
         }
@@ -26,14 +26,13 @@
             line-height: 1.6;
         }
 
-        /* Layout Grid */
         .portfolio-wrapper {
             display: grid;
             grid-template-columns: 400px 1fr;
             min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Scrollable Sidebar */
         .sidebar {
             background-color: var(--secondary);
             padding: 80px 50px;
@@ -44,10 +43,24 @@
             flex-direction: column;
             justify-content: flex-start;
             border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--secondary);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: var(--accent);
+            border-radius: 10px;
         }
 
         .profile-container {
-            margin-bottom: 40px;
+            margin-bottom: 10px; /* Reduced from 40px to lessen whitespace */
         }
 
         .profile-pic {
@@ -58,7 +71,8 @@
             border: 4px solid white;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             margin-bottom: 25px;
-            background-color: #ddd;
+            background-color: #e2e8f0;
+            display: block;
         }
 
         h1 { 
@@ -72,16 +86,21 @@
         .tagline { 
             color: var(--accent); 
             font-weight: 600; 
-            margin: 20px 0;
+            margin: 20px 0 10px 0; /* Tightened bottom margin */
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .contact-box {
-            margin-top: auto;
+            margin-top: 0;
+            padding-top: 10px; /* Reduced from 40px to lessen whitespace */
             font-size: 0.95rem;
             color: var(--muted);
+        }
+
+        .contact-box p {
+            margin: 5px 0; /* Tightened spacing between contact lines */
         }
 
         .social-links {
@@ -100,7 +119,6 @@
             color: var(--accent);
         }
 
-        /* Main Content */
         .main-content {
             padding: 80px 10%;
         }
@@ -128,7 +146,36 @@
             margin-left: 20px;
         }
 
-        /* Project Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+            color: var(--muted);
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.3;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .summary-item:hover {
+            color: var(--text);
+        }
+
+        .summary-item::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block; 
+            width: 1.2em;
+            flex-shrink: 0;
+        }
+
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -174,7 +221,6 @@
             margin: 0;
         }
 
-        /* Skills */
         .skills-list {
             list-style: none;
             padding: 0;
@@ -192,7 +238,6 @@
             border: 1px solid #e2e8f0;
         }
 
-        /* Experience */
         .exp-item {
             margin-bottom: 40px;
             position: relative;
@@ -222,6 +267,7 @@
                 padding: 60px 10%; 
                 border-right: none;
                 border-bottom: 1px solid #e2e8f0;
+                overflow-y: visible;
             }
             .main-content { padding: 60px 10%; }
             h1 { font-size: 4rem; }
@@ -238,31 +284,35 @@
 <div class="portfolio-wrapper">
     <aside class="sidebar">
         <div class="profile-container">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&h=300&auto=format&fit=crop" alt="Profile Photo" class="profile-pic">
-            <h1>YOUR<br>NAME</h1>
-            <p class="tagline">Creative Strategist</p>
+            <img src="https://scontent.fakl1-4.fna.fbcdn.net/v/t39.30808-6/481282634_10222121100936682_6211189725825066556_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=dVgteLAalFsQ7kNvwFkwNxL&_nc_oc=Admpd3DRTCXZS8ZlmPHh59cbBA9glnFWf3kpisacCgZXkZA74Ro9wtTRLolaUpd7FCSLFB_JiwfeV3uEFuSGp6G7&_nc_zt=23&_nc_ht=scontent.fakl1-4.fna&_nc_gid=eososVmy-wmwYvhB3T0ZUw&_nc_ss=8&oh=00_AfzdDUb8UD6kySoXMxNlsX8nUgqE1MwTUOc8aSuBx5SIGA&oe=69BAB299" alt="Oliver Lucindo" class="profile-pic">
+            <h1>Oliver<br>LUCINDO</h1>
+            <p class="tagline">IT Professional</p>
         </div>
 
         <div class="contact-box">
             <p><strong>Location:</strong> North Shore, Auckland</p>
-            <p><strong>Email:</strong> hello@yourdomain.co.nz</p>
+            <p><strong>Email:</strong> oliver@lucindo.co.nz</p>
             <p><strong>Phone:</strong> +64 21 000 0000</p>
             
             <div class="social-links">
                 <a href="#">LinkedIn</a>
                 <a href="#">GitHub</a>
-                <a href="#">Dribbble</a>
+                <a href="#">System Portfolio</a>
             </div>
         </div>
     </aside>
 
     <main class="main-content">
         
-        <section id="about">
-            <h2>About</h2>
-            <p style="font-size: 1.2rem; color: var(--muted);">
-                I am a multidisciplinary professional based in Auckland, specialising in bridging the gap between business strategy and digital execution. With a focus on the New Zealand market, I help brands grow through user-centric design and data-driven insights.
-            </p>
+        <section id="summary">
+            <h2>Professional Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">Experience in enterprise-level organizations, global companies, and government agencies (AOG)</div>
+                <div class="summary-item">Managed Infrastructure Services (New Zealand)</div>
+                <div class="summary-item">ICT/Telecommunications accounts from US, Canada</div>
+                <div class="summary-item">IT Project Management; Cloud Infrastructure; Major Incident Management; Disaster Recovery; Change Management</div>
+                <div class="summary-item">Twenty-six years of experience in Team Management; directly managed hundreds of staff in various teams, support roles and companies</div>
+            </div>
         </section>
 
         <section id="projects">
@@ -271,24 +321,24 @@
                 <div class="project-card">
                     <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="project-info">
-                        <h3>Hospitality Rebrand</h3>
-                        <p>A full digital transformation for a Takapuna-based restaurant group, increasing bookings by 35%.</p>
+                        <h3>Infrastructure Overhaul</h3>
+                        <p>A full digital transformation for a Takapuna-based firm, improving network uptime and system reliability by 35%.</p>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="project-info">
-                        <h3>SaaS Dashboard</h3>
-                        <p>User interface design for a fintech startup, focusing on clean data visualisation and accessibility.</p>
+                        <h3>Enterprise Dashboard</h3>
+                        <p>IT monitoring solution for a local startup, focusing on real-time hardware analytics and security accessibility.</p>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop');"></div>
                     <div class="project-info">
-                        <h3>E-commerce Launch</h3>
-                        <p>End-to-end development of a high-performance retail site for a local Auckland fashion label.</p>
+                        <h3>Cloud Deployment</h3>
+                        <p>End-to-end migration of high-performance retail systems for a local Auckland fashion label.</p>
                     </div>
                 </div>
             </div>
@@ -297,12 +347,17 @@
         <section id="expertise">
             <h2>Expertise</h2>
             <ul class="skills-list">
-                <li class="skill-item">UI/UX Design</li>
-                <li class="skill-item">Brand Identity</li>
-                <li class="skill-item">React & Tailwind CSS</li>
-                <li class="skill-item">SEO Strategy</li>
-                <li class="skill-item">Market Analysis</li>
+                <li class="skill-item">ITSM / ITIL</li>
+                <li class="skill-item">ISO 20000 / ISO 9000</li>
+                <li class="skill-item">Agile</li>
                 <li class="skill-item">Project Management</li>
+                <li class="skill-item">Incident Management</li>
+                <li class="skill-item">Process Improvement</li>
+                <li class="skill-item">Leadership and People Management</li>
+                <li class="skill-item">Training and Documentation</li>
+                <li class="skill-item">Process Audit and Compliance</li>
+                <li class="skill-item">Disaster Recovery</li>
+                <li class="skill-item">Change Management</li>
             </ul>
         </section>
 
@@ -310,19 +365,19 @@
             <h2>Experience</h2>
             <div class="exp-item">
                 <span class="exp-meta">2023 — PRESENT | AUCKLAND CENTRAL</span>
-                <h4>Senior Creative Lead</h4>
-                <p>Leading a cross-functional team of designers and developers to deliver high-scale digital products for New Zealand's top firms.</p>
+                <h4>Senior IT Lead</h4>
+                <p>Leading a cross-functional technical team to deliver high-scale digital infrastructure for New Zealand's top firms.</p>
             </div>
 
             <div class="exp-item">
                 <span class="exp-meta">2020 — 2023 | NORTH SHORE</span>
-                <h4>Digital Strategist</h4>
-                <p>Specialised in growth marketing and conversion rate optimisation for boutique agencies.</p>
+                <h4>Systems Specialist</h4>
+                <p>Specialised in network optimization and infrastructure maintenance for boutique technology agencies.</p>
             </div>
         </section>
 
         <footer style="margin-top: 100px; color: var(--muted); font-size: 0.8rem;">
-            &copy; 2026 Your Name. Built in Auckland, New Zealand.
+            &copy; 2026 Oliver Lucindo. Built in Auckland, New Zealand.
         </footer>
     </main>
 </div>
