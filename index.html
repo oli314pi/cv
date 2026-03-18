@@ -3,450 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oliver Lucindo | IT Professional | Auckland, NZ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Notes</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         :root {
-            /* Executive Navy Palette */
-            --bg: #ffffff;
-            --sidebar-bg: #0f172a; 
-            --sidebar-text: #f8fafc;
-            --text: #1e293b;       
-            --accent: #334155;     
-            --secondary-accent: #6366f1; 
-            --secondary: #f1f5f9;  
-            --muted: #64748b;
-            --border: #e2e8f0;
+            --primary: #007bff;
+            --secondary: #6c757d;
+            --bg: #f8f9fa;
+            --text: #333;
+            --white: #ffffff;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            max-width: 700px; 
+            margin: 0 auto; 
+            padding: 20px; 
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
 
-        .portfolio-wrapper {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            background-color: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            padding: 80px 50px;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid var(--sidebar-bg);
-            overflow-y: auto;
-        }
-
-        .profile-pic {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            margin-bottom: 25px;
-            background-color: var(--accent);
-        }
-
-        h1 { 
-            font-size: 3rem; 
-            margin: 0; 
-            line-height: 0.9; 
-            font-weight: 800;
-            letter-spacing: -2px;
-            color: #ffffff;
-        }
-
-        .tagline { 
-            color: var(--secondary-accent); 
-            font-weight: 600; 
-            margin: 20px 0 10px 0;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .contact-box {
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #cbd5e1;
-        }
-
-        .contact-box p { margin: 8px 0; }
-        .contact-box strong { color: #ffffff; }
-        .contact-box a { color: #ffffff; text-decoration: none; border-bottom: 1px solid var(--secondary-accent); }
-
-        .social-links { 
-            margin-top: 35px; 
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .social-links a, .cv-btn {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cv-btn {
-            background: var(--secondary-accent);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            text-align: center;
-            color: white;
-            font-family: inherit;
-        }
-
-        .social-links a:hover { color: var(--secondary-accent); }
-        .cv-btn:hover { background: #4f46e5; transform: translateY(-2px); }
-
-        /* Main Content Area */
-        .main-content {
-            padding: 80px 10%;
-        }
-
-        section { 
-            margin-bottom: 80px; 
-            max-width: 900px; 
-        }
-
-        h2 { 
-            font-size: 1.3rem; 
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            color: var(--sidebar-bg);
-        }
-
-        h2::after {
-            content: "";
-            height: 2px;
-            background: var(--secondary-accent);
-            flex-grow: 1;
-            margin-left: 20px;
-            opacity: 0.3;
-        }
-
-        /* Summary & Leadership Text */
-        .summary-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            color: var(--text);
-            font-size: 1.05rem;
-        }
-
-        .summary-item {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .summary-item::before {
-            content: "→";
-            color: var(--secondary-accent);
-            font-weight: bold;
-            width: 1.5em;
-            flex-shrink: 0;
-        }
-
-        .leadership-text {
-            font-size: 1.1rem;
-            color: var(--text);
-            border-left: 4px solid var(--sidebar-bg);
-            padding-left: 20px;
-            font-style: italic;
-            background: var(--secondary);
-            padding: 25px;
-            border-radius: 0 12px 12px 0;
-        }
-
-        /* Selected Work Cards */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .project-img {
-            height: 160px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .project-info {
+        .card {
+            background: var(--white);
             padding: 20px;
-        }
-
-        .project-info h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.1rem;
-            color: var(--sidebar-bg);
-        }
-
-        .project-info p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--muted);
-        }
-
-        /* Experience Timeline */
-        .exp-item {
-            margin-bottom: 40px;
-            padding-left: 30px;
-            border-left: 2px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
             position: relative;
         }
 
-        .exp-item::before {
-            content: "";
-            position: absolute;
-            left: -7px;
-            top: 6px;
-            width: 12px;
-            height: 12px;
-            background: var(--sidebar-bg);
-            border-radius: 2px;
-            transform: rotate(45deg);
-        }
-
-        .exp-meta { color: var(--secondary-accent); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 10px; }
-        .exp-item h4 { margin: 15px 0 5px 0; font-size: 1.1rem; color: var(--sidebar-bg); }
-        .exp-item p { margin: 5px 0; color: var(--muted); font-size: 0.95rem; }
-        .exp-item ul { padding-left: 18px; margin: 10px 0; color: var(--muted); font-size: 0.95rem; }
-
-        /* Contact Form */
-        .contact-form {
-            background: var(--secondary);
-            padding: 30px;
-            border-radius: 12px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
+        textarea { 
+            width: 100%; 
+            height: 120px; 
+            border-radius: 8px; 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
             display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 0.8rem;
-            color: var(--sidebar-bg);
-            text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: inherit;
+        .save-container {
+            display: flex;
+            justify-content: flex-end;
         }
 
-        .submit-btn {
-            background-color: var(--sidebar-bg);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 6px;
-            font-weight: 600;
+        button#saveBtn { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; 
+            cursor: pointer; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease;
+        }
+
+        button#saveBtn:hover { opacity: 0.9; transform: scale(1.05); }
+        button#saveBtn:disabled { background: var(--secondary); cursor: not-allowed; }
+
+        .note { 
+            background: var(--white); 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-top: 15px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .note-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .action-link {
+            font-size: 0.85rem;
             cursor: pointer;
-            width: 100%;
-            transition: opacity 0.2s;
+            font-weight: bold;
         }
 
-        .submit-btn:hover {
-            opacity: 0.9;
+        .copy-link { color: var(--primary); }
+        .delete-link { color: #ff4d4d; }
+
+        p { margin: 0; white-space: pre-wrap; word-wrap: break-word; }
+        
+        /* Toast Notification Styling */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.2s, visibility 0.2s;
         }
 
-        /* Print Optimization */
-        @media print {
-            .sidebar, .contact-form, #contact { display: none !important; }
-            .portfolio-wrapper { display: block; }
-            .main-content { padding: 0; }
-            h1, h2 { color: black !important; }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
         }
 
-        @media (max-width: 1024px) {
-            .portfolio-wrapper { grid-template-columns: 1fr; }
-            .sidebar { height: auto; position: relative; padding: 60px 10%; border-right: none; }
-        }
+        .icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     </style>
 </head>
 <body>
 
-<div class="portfolio-wrapper">
-    <aside class="sidebar">
-        <div class="profile-container">
-            <img src="https://i.imghippo.com/files/MUf5981A.png" alt="Oliver Lucindo" class="profile-pic">
-            <h1>Oliver<br>LUCINDO</h1>
-            <p class="tagline">IT Professional</p>
+    <div class="card">
+        <textarea id="noteInput" placeholder="Wake up, Neo"></textarea>
+        <div class="save-container">
+            <button id="saveBtn" onclick="saveNote()" title="Save Note">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+            </button>
         </div>
+    </div>
 
-        <div class="contact-box">
-            <p><strong>Location:</strong> North Shore, Auckland</p>
-            <p><strong>Email:</strong> <a href="mailto:oliver948@gmail.com">oliver948@gmail.com</a></p>
-            <p><strong>Phone:</strong> +64 21 081 221 64</p>
+    <div id="notesContainer"></div>
+    <div id="toast">Note copied to clipboard!</div>
+
+    <script>
+        const SUPABASE_URL = 'https://cqwuhjhjlwwrgxvdlxjq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_41eLBGWM-kaeI6B2d3Q88w_imz0fXWW';
+        
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        document.addEventListener('DOMContentLoaded', loadNotes);
+
+        async function saveNote() {
+            const input = document.getElementById('noteInput');
+            const btn = document.getElementById('saveBtn');
             
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/oliver-lucindo-4140441/" target="_blank">LinkedIn Profile</a>
-                <button onclick="window.print()" class="cv-btn">Download CV (PDF)</button>
-            </div>
-        </div>
-    </aside>
+            if (!input.value.trim()) return;
 
-    <main class="main-content">
-        <section id="summary">
-            <h2>Professional Summary</h2>
-            <div class="summary-grid">
-                <div class="summary-item">32+ years of technical and leadership experience across enterprise-level organizations, global corporations, and NZ Government agencies.</div>
-                <div class="summary-item">Expertise in IT Project Management, Cloud Infrastructure, and ISO Standard Compliance (ISO 20000).</div>
-                <div class="summary-item">Proven track record in Major Incident Management, Digital Transformation, and SLA automation.</div>
-                <div class="summary-item">Strong foundation in software programming and systems integration, including Y2K compliance and BMS management.</div>
-            </div>
-        </section>
+            btn.disabled = true;
 
-        <section id="leadership">
-            <h2>Communication & Leadership</h2>
-            <div class="leadership-text">
-                Recognized leader with over 26 years of experience managing high-performing technical support and operational teams. Consistently awarded and promoted for integrity, teamwork, and excellence in customer service across New Zealand, Canada, and the USA.
-            </div>
-        </section>
+            const { error } = await _supabase
+                .from('notes')
+                .insert([{ content: input.value }]);
 
-        <section id="projects">
-            <h2>Selected Work</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop');"></div>
-                    <div class="project-info">
-                        <h3>Migration of Refining NZ</h3>
-                        <p>Involved in the full migration of Service Support operations from Revera to Spark NZ. Full training of the Spark Service Desk</p>
+            if (error) {
+                alert('Error: ' + error.message);
+            } else {
+                input.value = '';
+                await loadNotes();
+            }
+
+            btn.disabled = false;
+        }
+
+        async function loadNotes() {
+            const container = document.getElementById('notesContainer');
+            
+            const { data: notes, error } = await _supabase
+                .from('notes')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                container.innerHTML = `<p style="color:red">Error: ${error.message}</p>`;
+                return;
+            }
+
+            renderNotes(notes);
+        }
+
+        function renderNotes(notesToDisplay) {
+            const container = document.getElementById('notesContainer');
+            
+            if (notesToDisplay.length === 0) {
+                container.innerHTML = '<p style="color:#888; text-align:center;">No notes found.</p>';
+                return;
+            }
+
+            container.innerHTML = notesToDisplay.map(note => `
+                <div class="note">
+                    <div class="note-actions">
+                        <span class="action-link copy-link" onclick="copyNote(\`${note.content.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">Copy</span>
+                        <span class="action-link delete-link" onclick="deleteNote('${note.id}')">Delete</span>
                     </div>
+                    <p>${note.content}</p>
                 </div>
+            `).join('');
+        }
 
-                <div class="project-card">
-                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop');"></div>
-                    <div class="project-info">
-                        <h3>ISO 20000 Certification</h3>
-                        <p>Completed the certification of DBA Team to ISO 20000 Standards. Conducted internal audits of all IT Teams.</p>
-                    </div>
-                </div>
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            // Disappear after 500ms
+            setTimeout(() => { 
+                toast.className = toast.className.replace("show", ""); 
+            }, 500);
+        }
 
-                <div class="project-card">
-                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop');"></div>
-                    <div class="project-info">
-                        <h3>Y2K Compliance</h3>
-                        <p>Ensured full compliance of building automation systems, CCTV, and fire monitoring to Y2K readiness.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        async function copyNote(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast();
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+        }
 
-        <section id="experience">
-            <h2>Experience</h2>
-            <div class="exp-item">
-                <span class="exp-meta">2022 — PRESENT | AIR NEW ZEALAND</span>
-                <h4>Service Management Specialist</h4>
-                <p>Leading Disaster Recovery and Change Management for business-critical airline applications.</p>
-                <h4>Service Desk Manager</h4>
-                <p>Leading frontline technical support for the airline's application suite.</p>
-            </div>
+        async function deleteNote(id) {
+            if (!confirm('Delete this note?')) return;
 
-            <div class="exp-item">
-                <span class="exp-meta">2020 — 2022 | DDSIT (CONTRACTUAL)</span>
-                <ul>
-                    <li>Service Desk Manager (Watercare)</li>
-                    <li>Service Desk Manager (The Warehouse Group)</li>
-                    <li>Service Desk Administrator (AIA Group)</li>
-                    <li>Service Continuity Analyst (Southern Cross Group)</li>
-                </ul>
-            </div>
+            const { error } = await _supabase
+                .from('notes')
+                .delete()
+                .eq('id', id);
 
-            <div class="exp-item">
-                <span class="exp-meta">2015 — 2020 | REVERA LIMITED</span>
-                <h4>Service Desk Team Lead</h4>
-                <p>Managed 24/7 Service Desk operations for 300+ companies, including Government Agencies (AoG).</p>
-                <ul>
-                    <li>Incident Manager for P1/P2 issues.</li>
-                    <li>Coordinated resolver teams and drafted incident reporting templates.</li>
-                </ul>
-            </div>
-
-            <div class="exp-item">
-                <span class="exp-meta">2012 — 2014 | TELUS INTERNATIONAL</span>
-                <h4>Process Compliance Specialist / Incident Manager</h4>
-                <p>Ensured technical group compliance with ISO 20000 standards for telecommunications in Canada.</p>
-                <ul>
-                    <li>Achieved yearly ISO 20000 re-certification for all IT Operations Teams.</li>
-                    <li>Led the DBA Team to attain its first ISO 20000 Certification.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2>Get in Touch</h2>
-            <div class="contact-form">
-                <form action="https://formspree.io/f/mkoqzpzz" method="POST">
-                    <input type="hidden" name="_subject" value="New Portfolio Inquiry">
-                    <div class="form-group">
-                        <label for="full-name">Name</label>
-                        <input type="text" name="name" id="full-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email-address">Email Address</label>
-                        <input type="email" name="_replyto" id="email-address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea name="message" id="message" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
-        </section>
-
-        <footer style="margin-top: 40px; color: var(--muted); font-size: 0.8rem;">
-            &copy; 2026 Oliver Lucindo. Auckland, New Zealand.
-        </footer>
-    </main>
-</div>
-
+            if (error) alert('Error: ' + error.message);
+            else loadNotes();
+        }
+    </script>
 </body>
 </html>
